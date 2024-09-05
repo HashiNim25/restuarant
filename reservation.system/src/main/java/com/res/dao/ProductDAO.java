@@ -8,13 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.res.model.Product;
 
 public class ProductDAO {
 	public void addProduct(Product product) {
         String query = "INSERT INTO Product (name, price, description) VALUES (?, ?, ?)";
 
         try 
-        {   Connection connection = DBConnectionFactory.getConnection();
+        {   Connection connection = DBConnFactory.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, product.getName());
             statement.setDouble(2, product.getPrice());
@@ -31,7 +32,7 @@ public class ProductDAO {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM Product";
 
-        Connection connection = DBConnectionFactory.getConnection();
+        Connection connection = DBConnFactory.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
         while (resultSet.next()) 
